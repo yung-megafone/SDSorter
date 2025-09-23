@@ -1,7 +1,5 @@
-# SDSorter
-
 <p align="center">
-  <img src="media/sdsorter_logo.png" alt="SDSorter Logo" width="300"/>
+  <img src="media/sdsorter_logo.png" alt="SDSorter" width="300"/>
 </p>
 
 **Scanner Data Sorter for the SDS100/200 crowd (and beyond).**  
@@ -111,4 +109,5 @@ Built with frustration, caffeine, and way too many files by **yung-megafone**.
 
 ## 📜 License
 MIT — free to use, hack, and improve. Give credit where due.
+
 
