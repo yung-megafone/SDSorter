@@ -107,9 +107,8 @@ python sdsorter.py SRC_PATH DST_PATH [options]
 ## 👤 Author
 Built with frustration, caffeine, and way too many files by **yung-megafone**.
 
-Twitter/YouTube: *[@yung-megafone]*  (placeholder)
-
 ---
 
 ## 📜 License
 MIT — free to use, hack, and improve. Give credit where due.
+
