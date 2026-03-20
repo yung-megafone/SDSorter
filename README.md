@@ -2,17 +2,27 @@
   <img src="media/sdsorter_logo1.png" alt="SDSorter" width="300"/>
 </p>
 
-**Scanner Data Sorter for the SDS100/200 crowd (and beyond).**  
-Created by *yung-megafone*
+<p align="center">
+  <img src="https://img.shields.io/badge/version-v0.4.2-blue" />
+  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey" />
+  <img src="https://img.shields.io/badge/license-MIT-green" />
+</p>
+
+<p align="center">
+  <b>Scanner Recordings Sorter for the SDS100/200 (and beyond)</b><br>
+  Created by <i>yung-megafone</i>
+</p>
 
 ---
 
 ## Overview
-Uniden SDS radios (and many other recorders) generate **thousands of WAV files** quickly. Managing, organizing, and archiving those recordings by hand is a nightmare — Windows Explorer crawls, and SD cards fill fast.
 
-**SDSorter** automates that pain away.
+Uniden SDS radios (and similar systems) generate **thousands of WAV files rapidly**.  
+Managing them manually becomes unmanageable — Explorer slows down, SD cards fill, and archives turn into chaos.
 
-Point it at your ingest folder or SD card, and it will bucket your recordings into:
+**SDSorter automates that process.**
+
+Point it at your ingest folder or SD card, and it organizes recordings into:
 
 ```
 
@@ -20,125 +30,76 @@ YYYY/MM/DD/
 
 ````
 
-Now with a **full GUI, real-time stats, and dataset analysis tools** — built for people dealing with *hundreds of thousands to millions of files.*
+Now with a **full GUI, real-time metrics, and dataset analysis tools** — built for handling *hundreds of thousands to millions of files.*
 
 ---
 
 ## Features
 
 ### Core Sorting
-- **Fast**: Streaming walker + multi-threaded I/O handles **massive datasets**
-- **Safe by default**: **Copy** unless you explicitly enable move
-- **Flexible input**: WAV, MP3, M4A — anything timestamp-based
-- **Scanner-native**: Supports SDS100/200 filename format (`YYYY-MM-DD_hh-mm-ss.wav`)
+- **High performance**: Streaming walker + multi-threaded I/O
+- **Safe by default**: Copy unless explicitly set to move
+- **Flexible formats**: WAV, MP3, M4A (timestamp-based)
+- **Scanner-native support**: SDS100/200 naming (`YYYY-MM-DD_hh-mm-ss.wav`)
 
-### GUI (New)
-- **Modern interface** (no CLI required)
-- **Progress bar with % + live stats**
+### GUI
+- Modern interface (no CLI required)
+- Real-time progress + stats
 - One-click folder selection
-- Built-in logging viewer
-- Cancel jobs mid-run safely
+- Built-in log viewer
+- Safe job cancellation
 
-### Live Progress & Metrics
-- Real-time:
-  - Files processed
-  - Files/sec (true rate, not cumulative)
-  - Elapsed time
-- Clean layout:
-  - % progress next to bar (stable, no UI shifting)
-  - Detailed stats shown below
+### Live Metrics
+- Files processed
+- Files/sec (true rate)
+- Elapsed time
+- Stable UI (no shifting elements)
 
-### Analysis Mode (New)
-- Scan recording folders without modifying data
-- Generate dataset insights:
+### Analysis Mode
+- Scan datasets without modifying files
+- Generate insights:
   - File counts
   - Time distribution
-  - Recording density
-- Export results to CSV
-- Built-in chart visualization
+  - Density patterns
+- Export CSV
+- Built-in charts
 
 ### Reliability
-- Handles **millions of files without choking**
-- Designed to avoid:
+- Handles **millions of files**
+- Avoids:
   - Explorer slowdowns
   - UI freezing
   - Memory spikes
-- Skip errors and continue processing
+- Continues past errors
 
 ---
 
-## Quickstart (CLI)
+## Installation / Usage
 
-Dry run (safe preview):
-```powershell
-python sdsorter.py D:\Ingest E:\Archive --dry-run -v
-````
+### Windows (Recommended)
 
-Real copy (NVMe tuned):
+**Installer**
+- Download: `SDSorter_Setup_v0.4.2.exe`
+- Standard install
 
-```powershell
-python sdsorter.py D:\Ingest E:\Archive --workers 6 --skip-errors -v --logfile sort.log
-```
-
-Move (destructive — be sure):
-
-```powershell
-python sdsorter.py D:\Ingest E:\Archive --move --readonly --workers 4
-```
-
-Use file modified time instead:
-
-```powershell
-python sdsorter.py D:\Ingest E:\Archive --date-source mtime
-```
+**Portable**
+- Download: `SDSorter_Portable_v0.4.2.zip`
+- Extract and run `SDSorter.exe`
 
 ---
 
-## GUI Usage
-
-Just run:
-
-```bash
-python sdsorter.py
-```
-
-### Sort Tab
-
-* Select source + destination
-* Choose options (move, dry run, etc.)
-* Click **Start Sorting**
-
-### Analysis Tab
-
-* Select your recording folder
-* Click **Analyze**
-* Export CSV or view charts
-
----
-
-## Options
-
-| Flag            | Description                                        |
-| --------------- | -------------------------------------------------- |
-| `--move`        | Move instead of copy (destructive across devices). |
-| `--dry-run`     | Only log actions, no writes.                       |
-| `--readonly`    | Mark destination files read-only.                  |
-| `--skip-errors` | Skip problematic files and continue.               |
-| `--date-source` | `filename` (default) or `mtime`.                   |
-| `--ext`         | Restrict extensions (default: `.wav`).             |
-| `--workers`     | Parallel workers (SSD/NVMe: 4–8; HDD: 2–3).        |
-| `-v` / `-vv`    | Increase verbosity.                                |
-| `-q`            | Quiet mode (errors only).                          |
-| `--logfile`     | Tee logs to a file.                                |
-
----
-
-## Install & Run
+### Cross-Platform (Python)
 
 Requires Python 3.8+
 
 ```bash
 pip install tqdm customtkinter matplotlib
+````
+
+Run GUI:
+
+```bash
+python sdsorter.py
 ```
 
 Run CLI:
@@ -147,19 +108,58 @@ Run CLI:
 python sdsorter.py SRC_PATH DST_PATH [options]
 ```
 
-Run GUI:
+---
 
-```bash
-python sdsorter.py
+## Quickstart (CLI)
+
+Dry run (safe preview):
+
+```powershell
+python sdsorter.py D:\Ingest E:\Archive --dry-run -v
+```
+
+Real copy:
+
+```powershell
+python sdsorter.py D:\Ingest E:\Archive --workers 6 --skip-errors -v --logfile sort.log
+```
+
+Move (destructive):
+
+```powershell
+python sdsorter.py D:\Ingest E:\Archive --move --readonly --workers 4
+```
+
+Use modified time:
+
+```powershell
+python sdsorter.py D:\Ingest E:\Archive --date-source mtime
 ```
 
 ---
 
-## Who needs this?
+## Options
 
-* SDS100/200 users drowning in recordings
+| Flag            | Description                                       |
+| --------------- | ------------------------------------------------- |
+| `--move`        | Move instead of copy (destructive across devices) |
+| `--dry-run`     | Preview only                                      |
+| `--readonly`    | Mark destination files read-only                  |
+| `--skip-errors` | Continue on errors                                |
+| `--date-source` | `filename` (default) or `mtime`                   |
+| `--ext`         | Restrict extensions (default: `.wav`)             |
+| `--workers`     | Parallel workers (SSD: 4–8, HDD: 2–3)             |
+| `-v` / `-vv`    | Verbosity                                         |
+| `-q`            | Quiet mode                                        |
+| `--logfile`     | Output logs to file                               |
+
+---
+
+## Who is this for?
+
+* SDS100/200 users overwhelmed with recordings
 * SDR / scanner hobbyists archiving long-term
-* Data hoarders with **hundreds of thousands to millions of files**
+* Data hoarders managing massive datasets
 * Anyone who’s ever said:
 
   > “I’ll sort it later…”
@@ -169,16 +169,16 @@ python sdsorter.py
 ## Roadmap
 
 * Channel / department-aware sorting
-* SQLite indexing for instant search
+* SQLite indexing
 * Config profiles
-* Standalone executable (no Python required)
-* Dark theme polish + UI scaling improvements
+* Improved UI scaling + polish
 
 ---
 
 ## Author
 
-Built out of frustration, caffeine, and way too many files by **yung-megafone**
+Built out of frustration, caffeine, and way too many files
+**yung-megafone**
 
 ---
 
